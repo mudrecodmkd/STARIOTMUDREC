@@ -1,19 +1,29 @@
 class Message {
-  final bool fromUser; // true=user, false=mudrec
   final String text;
-  final DateTime time;
+  final bool isUser;
+  final DateTime timestamp;
 
-  Message({required this.fromUser, required this.text, required this.time});
+  Message({
+    required this.text,
+    required this.isUser,
+    required this.timestamp,
+  });
 
-  Map<String, dynamic> toJson() => {
-        'fromUser': fromUser,
-        'text': text,
-        'time': time.toIso8601String(),
-      };
+  // од JSON во објект
+  factory Message.fromJson(Map<String, dynamic> json) {
+    return Message(
+      text: json['text'],
+      isUser: json['isUser'],
+      timestamp: DateTime.parse(json['timestamp']),
+    );
+  }
 
-  factory Message.fromJson(Map<String, dynamic> j) => Message(
-        fromUser: j['fromUser'] as bool,
-        text: j['text'] as String,
-        time: DateTime.parse(j['time'] as String),
-      );
+  // од објект во JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'text': text,
+      'isUser': isUser,
+      'timestamp': timestamp.toIso8601String(),
+    };
+  }
 }
