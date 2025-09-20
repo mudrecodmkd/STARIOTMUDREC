@@ -19,4 +19,4 @@ workflows:
     publishing:
       email:
         recipients:
-          - $CM_USER_EMAIL
+          - vancejanakiev78@gmail.com
